@@ -1,0 +1,60 @@
+{% extends "base_site.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "Predict" %}{% endblock title %}
+
+{% block stylesheets %}
+    {{ block.super }}
+{#    <link rel="stylesheet" href="/static/css/drag_drop.css">#}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="page-holder w-100 d-flex flex-wrap">
+        <div class="container-fluid px-xl-5">
+          <section class="py-5">
+            <div class="row">
+                  <div class="col-lg-6 mb-5">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="h6 text-uppercase mb-0">{% trans "Upload X-Ray" %}</h3>
+                      </div>
+                      <div class="card-body">
+                        <p>{% trans "You can upload both frontal and lateral x-rays." %}</p>
+                        <form action="{% url "predict" %}" enctype="multipart/form-data" method="POST">{% csrf_token %}
+                            <div class="form-group">
+                                  <label class="form-control-label text-uppercase"
+                                         for="id_frontal">{% trans 'Frontal X-Ray' %}
+                                     </label>
+                                    <div>
+                                        <input id="id_frontal" type="file" name="frontal"/>
+                                    </div>
+                              </div>
+                            <div class="form-group">
+                                  <label class="form-control-label text-uppercase"
+                                         for="id_lateral">{% trans 'Lateral X-Ray' %}
+                                     </label>
+                                    <div>
+                                        <input id="id_lateral" type="file" name="lateral"/>
+                                    </div>
+                              </div>
+                          <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+          </section>
+{#            <section>#}
+{#                {% include "drop.html" %}#}
+{#            </section>#}
+        </div>
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+{#    <script src="/static/js/drag_drop.js"></script>#}
+    {{ block.super }}
+{% endblock javascripts %}
