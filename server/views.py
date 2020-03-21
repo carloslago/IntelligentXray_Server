@@ -13,6 +13,7 @@ def test(request):
 
 
 def predict(request):
+    context = {}
     if request.method == 'POST':
         form = TestForm(request.POST, request.FILES)
         if form.is_valid():
@@ -21,11 +22,17 @@ def predict(request):
             lateral = cd.get('lateral')
             if frontal is not None or lateral is not None:
                 test = form.save()
-                res = predict_img(test.frontal.path)
-                print(res)
+                pathologies = predict_img(test.frontal.path)
+                test.prediction = pathologies
+                test.save()
+                print(pathologies)
+                context['pathologies'] = pathologies
+                context['visibility'] = "visible"
+                context['test'] = test
     else:
         form = TestForm
-    token = {}
-    token.update(csrf(request))
-    token['form'] = form
-    return render(request, "predict.html", token)
+        context['visibility'] = "hidden"
+    # token = {}
+    # token.update(csrf(request))
+    # token['form'] = form
+    return render(request, "predict.html", context)

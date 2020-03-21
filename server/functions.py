@@ -26,4 +26,10 @@ def predict_img(img):
     res = model.predict(tensor)
     res = np.around(res)
     res = res.astype(int)[0]
-    return res
+    types = ['No_Finding', 'Enlarged_Cardiomediastinum', 'Cardiomegaly', 'Lung_Opacity', 'Lung_Lesion', 'Edema',
+             'Consolidation', 'Pneumonia', 'Atelectasis', 'Pneumothorax', 'Pleural_Effusion', 'Pleural_Other',
+             'Fracture', 'Support_Devices']
+    pathologies = {}
+    for i in range(len(types)):
+        pathologies[types[i]] = res[i]
+    return pathologies

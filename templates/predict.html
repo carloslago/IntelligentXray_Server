@@ -6,7 +6,7 @@
 
 {% block stylesheets %}
     {{ block.super }}
-{#    <link rel="stylesheet" href="/static/css/drag_drop.css">#}
+    <link href="/static/css/magnific-popup.css" rel="stylesheet">
 {% endblock stylesheets %}
 
 {% block content %}
@@ -45,16 +45,45 @@
                       </div>
                     </div>
                   </div>
+                <div class="col-lg-6 mb-4" style="visibility: {{visibility}}">
+                <div class="card">
+                  <div class="card-header">
+                    <h6 class="text-uppercase mb-0">{% trans "Results" %}</h6>
+                  </div>
+                  <div class="card-body">
+                    <table class="table table-striped table-hover card-text">
+                      <thead>
+                        <tr>
+                          <th>{% trans "Pathology" %}</th>
+                          <th>{% trans "Prediction" %}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for key, value in pathologies.items %}
+                        <tr>
+                            <td><a class="image-link" href="/img/{{ test.frontal }}">{{key}}</a></td>
+                          <td>{{value}}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
-{#            <section>#}
-{#                {% include "drop.html" %}#}
-{#            </section>#}
         </div>
     </div>
 {% endblock content %}
 
 {% block javascripts %}
-{#    <script src="/static/js/drag_drop.js"></script>#}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/static/js/jquery.magnific-popup.js"></script>
+    <script>
+        $(document).ready(function($) {
+          $('.image-link').magnificPopup({type:'image'});
+        });
+    </script>
+
     {{ block.super }}
 {% endblock javascripts %}
