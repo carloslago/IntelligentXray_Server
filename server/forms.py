@@ -2,7 +2,8 @@ from django import forms
 from .models import *
 
 
-class UploadForm(forms.Form):
-    frontal = forms.ImageField(required=False)
-    lateral = forms.ImageField(required=False)
+class TestForm(forms.ModelForm):
+    class Meta:
+        model = Test
+        fields = ('frontal', 'lateral',)
 
