@@ -4,12 +4,16 @@ from django.template.context_processors import csrf
 from .functions import *
 import os
 
+
 def home(request):
     return render(request, "index.html")
 
 
 def test(request):
-    return render(request, "test.html")
+    context = {}
+    test = Test.objects.all()[0]
+    context['pathologies'] = test.prediction
+    return render(request, "sample_test.html", context)
 
 
 def predict(request):
@@ -25,14 +29,10 @@ def predict(request):
                 pathologies = predict_img(test.frontal.path)
                 test.prediction = pathologies
                 test.save()
-                print(pathologies)
                 context['pathologies'] = pathologies
                 context['visibility'] = "visible"
                 context['test'] = test
     else:
         form = TestForm
         context['visibility'] = "hidden"
-    # token = {}
-    # token.update(csrf(request))
-    # token['form'] = form
     return render(request, "predict.html", context)
