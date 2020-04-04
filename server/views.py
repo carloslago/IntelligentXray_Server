@@ -26,7 +26,14 @@ def predict(request):
             lateral = cd.get('lateral')
             if frontal is not None or lateral is not None:
                 test = form.save()
-                pathologies = predict_img(test.frontal.path)
+                images = []
+                if frontal is not None and lateral is not None:
+                    pathologies = predict_all(request.POST['action'], frontal=test.frontal.path,
+                                              lateral=test.lateral.path)
+                elif frontal is not None:
+                    pathologies = predict_all(request.POST['action'], frontal=test.frontal.path)
+                else:
+                    pathologies = predict_all(request.POST['action'], lateral=test.lateral.path)
                 test.prediction = pathologies
                 test.save()
                 context['pathologies'] = pathologies

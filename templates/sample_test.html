@@ -30,9 +30,13 @@
                       </thead>
                       <tbody>
                         {% for key, value in pathologies.items %}
-                        <tr>
-                            <td><a class="image-link" href="/img/{{ value.1 }}">{{key}}</a></td>
-                            <td>{{value.0}}</td>
+                            {% if value.0 == 0 %}
+                                <tr style="background-color: #ffe6e6">
+                            {% else %}
+                                <tr style="background-color: #ecffe6">
+                            {% endif %}
+                                    <td><a class="image-link" href="/img/{{ value.2 }}">{{key}}</a></td>
+                                    <td >{{value.0}} ({{ value.1 }})</td>
 {#                            <td><img src="/img/{{ value.1 }}" alt="{{ key }}" style="width: 50%; height: 60%"></td>#}
                         </tr>
                         {% endfor %}
