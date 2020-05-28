@@ -16,6 +16,29 @@
                 <section class="py-5">
                     <div class="row">
                         <h1> The Project</h1>
+                        <p>
+                            This project is oriented towards the diagnosis of multiple chest pathologies with deep learning. The datasets for the model development are acquired both by
+                            Kaggle and CheXpert, a dataset provided by Stanford ML Group, with over 200.000 samples with both frontal
+                            and lateral X-rays and 14 different observations. For the model development, after testing multiple architectures
+                             the chosen approach is using transfer learning with the DenseNet121. Then,
+                            an explanation of the model is performed to detect how it decides whether a certain pathology exists or
+                            not and what are the areas of interest for each pathology, comparing its thinking process with state of
+                            the art methods used by doctors to check if the predictions have sense.  This project helps to
+                            demonstrate the capabilities of deep learning and convolutional neural networks in the field of medicine,
+                            enabling fast and reliable diagnosis, which can be a life-changer especially in underdeveloped countries
+                            where there are fewer doctors available.
+                        </p>
+                        <h1> Guide </h1>
+                        <p>
+                            The website provides an easy wat to get the predictions from both frontal and lateral X-Ray, in order to do this it is
+                            necessary to use the <a href="{% url "predict" %}"> form </a>, here there are two possible options,
+                            to do just a simple prediction, where the output and the probability of each pathology will be given, the other option
+                            would be to get also a model explanation, which takes more time but generates an image for each pathology
+                            showing where the model is focusing for making the prediction. There is a <a href="{% url "test" %}">sample test</a> result in case you want to check
+                            it out first. The following image explains how to understand the model explanation images:
+
+                        </p>
+                        <img src="/static/img/pros_cons.PNG">
                     </div>
                 </section>
             </div>

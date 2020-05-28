@@ -15,7 +15,6 @@ def test(request):
     context['pathologies'] = test.prediction
     return render(request, "sample_test.html", context)
 
-
 def predict(request):
     context = {}
     if request.method == 'POST':

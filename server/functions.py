@@ -9,7 +9,7 @@ import os
 import matplotlib.pyplot as plt
 from PIL import Image
 
-model = tf.keras.models.load_model(os.path.join('server/static/model.h5'), compile=False)
+model = tf.keras.models.load_model(os.path.join('server/static/model2.h5'), compile=False)
 explainer = lime_image.LimeImageExplainer()
 types = ['No_Finding', 'Enlarged_Cardiomediastinum', 'Cardiomegaly', 'Lung_Opacity', 'Lung_Lesion', 'Edema',
          'Consolidation', 'Pneumonia', 'Atelectasis', 'Pneumothorax', 'Pleural_Effusion', 'Pleural_Other',
@@ -27,7 +27,7 @@ def img_to_tensor(img):
 
 def explanation_img(img, pathologies, path, view):
     explanation = explainer.explain_instance(img, model.predict, labels=types, hide_color=0,
-                                             num_samples=1000, top_labels=len(types))
+                                             num_samples=100, top_labels=len(types))
     for i in explanation.top_labels:
         temp, mask = explanation.get_image_and_mask(i, positive_only=False, num_features=5,
                                                     hide_rest=False)
